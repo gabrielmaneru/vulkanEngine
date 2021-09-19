@@ -15,6 +15,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Gaia/extern/GLFW/include"
 IncludeDir["glm"] = "Gaia/extern/glm"
+IncludeDir["vulkan"] = "C:/VulkanSDK/1.2.189.2"
 
 include "Gaia/extern/GLFW"
 
@@ -44,12 +45,14 @@ project "Gaia"
 		"%{prj.name}/src",
 		"%{prj.name}/extern",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.vulkan}/Include"
 	}
 	
 	links 
 	{ 
-		"GLFW"
+		"GLFW",
+		"%{IncludeDir.vulkan}/Lib"
 	}
 	
 	filter "system:windows"
