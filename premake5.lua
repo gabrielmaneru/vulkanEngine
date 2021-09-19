@@ -13,6 +13,10 @@ workspace "Gaia"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
+IncludeDir["GLFW"] = "Gaia/extern/GLFW/include"
+IncludeDir["glm"] = "Gaia/extern/glm"
+
+include "Gaia/extern/GLFW"
 
 project "Gaia"
 	location "Gaia"
@@ -38,11 +42,14 @@ project "Gaia"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/extern"
+		"%{prj.name}/extern",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links 
 	{ 
+		"GLFW"
 	}
 	
 	filter "system:windows"

@@ -1,0 +1,8 @@
+[submodule "GLFW"]
+	path = Gaia/extern/GLFW
+	url = https://github.com/gabrielmaneru/glfw-premake
+	branch = master
+[submodule "glm"]
+	path = Gaia/extern/glm
+	url = https://github.com/g-truc/glm
+	branch = master
