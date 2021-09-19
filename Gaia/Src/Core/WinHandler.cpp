@@ -1,9 +1,9 @@
 #include "GaiaPCH.h"
-#include "WindowHandler.h"
+#include "WinHandler.h"
 
 namespace Gaia
 {
-	WindowHandler::WindowHandler()
+	WinHandler::WinHandler()
 	{
 		if (glfwInit() != GLFW_TRUE)
 			throw std::runtime_error("Failed to initialize GLFW");
@@ -16,19 +16,19 @@ namespace Gaia
 			throw std::runtime_error("Failed to create Window");
 	}
 
-	WindowHandler::~WindowHandler()
+	WinHandler::~WinHandler()
 	{
 		glfwDestroyWindow(window);
 		glfwTerminate();
 	}
 
 
-	void WindowHandler::Update()
+	void WinHandler::PollEvents()
 	{
 		glfwPollEvents();
 	}
 
-	bool WindowHandler::ShouldClose()
+	bool WinHandler::ShouldClose()
 	{
 		return glfwWindowShouldClose(this->window);
 	}

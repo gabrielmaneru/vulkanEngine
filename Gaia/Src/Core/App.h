@@ -2,7 +2,8 @@
 
 namespace Gaia
 {
-	class WindowHandler;
+	class WinHandler;
+	class VkHandler;
 	class App
 	{
 	public:
@@ -11,6 +12,7 @@ namespace Gaia
 		void Run();
 
 	private:
-		WindowHandler* windowHandler = nullptr;
+		WinHandler* windowHandler = nullptr;
+		VkHandler* vkHandler = nullptr;
 	};
 }

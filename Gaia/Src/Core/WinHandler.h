@@ -3,13 +3,13 @@
 struct GLFWwindow;
 namespace Gaia
 {
-	class WindowHandler
+	class WinHandler
 	{
 	public:
-		WindowHandler();
-		~WindowHandler();
+		WinHandler();
+		~WinHandler();
 
-		void Update();
+		void PollEvents();
 		bool ShouldClose();
 
 		const unsigned int Width = 1920;

@@ -1,7 +1,8 @@
 #include "GaiaPCH.h"
 #include "App.h"
 
-#include "WindowHandler.h"
+#include "WinHandler.h"
+#include "VkHandler.h"
 
 namespace Gaia
 {
@@ -9,7 +10,8 @@ namespace Gaia
 	{
 		try
 		{
-			this->windowHandler = new WindowHandler();
+			this->windowHandler = new WinHandler();
+			this->vkHandler = new VkHandler();
 		}
 		catch (const std::exception& e)
 		{
@@ -23,7 +25,7 @@ namespace Gaia
 	{
 		do
 		{
-			this->windowHandler->Update();
+			this->windowHandler->PollEvents();
 		} while (!this->windowHandler->ShouldClose());
 	}
 
