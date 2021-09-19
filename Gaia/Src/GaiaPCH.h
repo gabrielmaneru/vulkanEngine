@@ -9,8 +9,3 @@
 #include <extern/glm.h>
 #include <extern/GLFW.h>
 #include <vulkan/vulkan.h>
-
-// Usings
-using u32 = unsigned int;
-using f32 = float;
-using f64 = double;

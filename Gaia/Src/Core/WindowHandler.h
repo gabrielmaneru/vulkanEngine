@@ -12,6 +12,9 @@ namespace Gaia
 		void Update();
 		bool ShouldClose();
 
+		const unsigned int Width = 1920;
+		const unsigned int Height = 1080;
+
 	private:
 		GLFWwindow* window;
 	};
