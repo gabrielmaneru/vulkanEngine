@@ -52,7 +52,7 @@ project "Gaia"
 	links 
 	{ 
 		"GLFW",
-		"%{IncludeDir.vulkan}/Lib"
+		"%{IncludeDir.vulkan}/Lib/vulkan-1"
 	}
 	
 	filter "system:windows"
