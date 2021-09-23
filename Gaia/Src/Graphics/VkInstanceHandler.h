@@ -8,6 +8,8 @@ namespace Gaia
 		VkInstanceHandler();
 		~VkInstanceHandler();
 
+		VkInstance getInstance() { return this->instance; }
+
 	private:
 		void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 		static bool checkValidationLayerSupport();

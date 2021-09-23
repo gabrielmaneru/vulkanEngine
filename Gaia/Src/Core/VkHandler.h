@@ -3,6 +3,7 @@
 namespace Gaia
 {
 	class VkInstanceHandler;
+	class VkPhysicalDeviceHandler;
 
 	class VkHandler
 	{
@@ -12,5 +13,6 @@ namespace Gaia
 
 	private:
 		VkInstanceHandler* instanceHandler;
+		VkPhysicalDeviceHandler* physicalDeviceHandler;
 	};
 }
