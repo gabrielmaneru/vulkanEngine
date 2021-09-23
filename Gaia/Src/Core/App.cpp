@@ -31,6 +31,7 @@ namespace Gaia
 
 	void App::Shutdown()
 	{
+		delete this->vkHandler;
 		delete this->windowHandler;
 	}
 }
