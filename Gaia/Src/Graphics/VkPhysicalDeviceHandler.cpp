@@ -27,21 +27,42 @@ namespace Gaia
 		this->physicalDevice = candidates.rbegin()->second;
 	}
 
-	VkPhysicalDeviceHandler::~VkPhysicalDeviceHandler()
-	{
-	}
-
 	int VkPhysicalDeviceHandler::rateDeviceSuitability(VkPhysicalDevice device)
 	{
 		VkPhysicalDeviceProperties deviceProperties;
 		VkPhysicalDeviceFeatures deviceFeatures;
 		vkGetPhysicalDeviceProperties(device, &deviceProperties);
 		vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
-		int score = 0;
 
+		// If the device can't process the Graphics Queue commands, discard it
+		QueueFamilyIndices indices = findQueueFamilies(device);
+		if (!indices.IsComplete())
+			return 0;
+
+		int score = 0;
 		// Pick first discrete GPU
 		if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
 			score += 1000;
 		return score;
+	}
+	VkPhysicalDeviceHandler::QueueFamilyIndices VkPhysicalDeviceHandler::findQueueFamilies(VkPhysicalDevice device)
+	{
+		uint32_t queueFamilyCount = 0;
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+		std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+		int i = 0;
+		QueueFamilyIndices indices;
+		for (const auto& queueFamily : queueFamilies)
+		{
+			if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+				indices.graphicsFamily = i;
+			if (indices.IsComplete())
+				break;
+			i++;
+		}
+
+		return indices;
 	}
 }

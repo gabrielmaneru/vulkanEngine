@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <vector>
 #include <map>
+#include <optional>
 
 // External
 #pragma warning(push, 0)

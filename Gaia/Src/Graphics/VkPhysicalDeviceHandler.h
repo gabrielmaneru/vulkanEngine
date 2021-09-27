@@ -6,9 +6,18 @@ namespace Gaia
 	{
 	public:
 		VkPhysicalDeviceHandler(VkInstance instance);
-		~VkPhysicalDeviceHandler();
+
+
+		struct QueueFamilyIndices
+		{
+			std::optional<uint32_t> graphicsFamily;
+			bool IsComplete() { return graphicsFamily.has_value(); }
+		};
+		VkPhysicalDevice getPhysicalDevice()const { return this->physicalDevice; }
+		QueueFamilyIndices getQueueIndices()const { return findQueueFamilies(this->physicalDevice); }
 
 	private:
+		static QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 		static int rateDeviceSuitability(VkPhysicalDevice device);
 
 		VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
