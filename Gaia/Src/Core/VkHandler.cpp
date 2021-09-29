@@ -33,7 +33,7 @@ namespace Gaia
 		}
 
 		this->surfaceHandler = new VkSurfaceHandler(window, this->instanceHandler->getInstance());
-		this->physicalDeviceHandler = new VkPhysicalDeviceHandler(this->instanceHandler->getInstance());
+		this->physicalDeviceHandler = new VkPhysicalDeviceHandler(this->instanceHandler->getInstance(), this->surfaceHandler->GetSurface());
 		this->logicalDeviceHandler = new VkLogicalDeviceHandler(this->physicalDeviceHandler);
 	}
 	VkHandler::~VkHandler()

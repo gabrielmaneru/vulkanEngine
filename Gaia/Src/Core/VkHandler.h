@@ -1,12 +1,13 @@
 #pragma once
 
+struct GLFWwindow;
+
 namespace Gaia
 {
 	class VkInstanceHandler;
 	class VkPhysicalDeviceHandler;
 	class VkLogicalDeviceHandler;
 	class VkSurfaceHandler;
-	class GLFWwindow;
 
 	class VkHandler
 	{

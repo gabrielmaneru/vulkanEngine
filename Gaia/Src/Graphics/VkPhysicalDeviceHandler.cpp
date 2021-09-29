@@ -3,7 +3,8 @@
 
 namespace Gaia
 {
-	VkPhysicalDeviceHandler::VkPhysicalDeviceHandler(VkInstance instance)
+	VkPhysicalDeviceHandler::VkPhysicalDeviceHandler(VkInstance instance, VkSurfaceKHR surface)
+		: surface(surface)
 	{
 		// Check if any GPU is supported
 		uint32_t deviceCount = 0;
@@ -27,7 +28,7 @@ namespace Gaia
 		this->physicalDevice = candidates.rbegin()->second;
 	}
 
-	int VkPhysicalDeviceHandler::rateDeviceSuitability(VkPhysicalDevice device)
+	int VkPhysicalDeviceHandler::rateDeviceSuitability(VkPhysicalDevice device)const
 	{
 		VkPhysicalDeviceProperties deviceProperties;
 		VkPhysicalDeviceFeatures deviceFeatures;
@@ -35,7 +36,7 @@ namespace Gaia
 		vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
 
 		// If the device can't process the Graphics Queue commands, discard it
-		QueueFamilyIndices indices = findQueueFamilies(device);
+		QueueFamilyIndices indices = findQueueFamilies(device, surface);
 		if (!indices.IsComplete())
 			return 0;
 
@@ -45,7 +46,7 @@ namespace Gaia
 			score += 1000;
 		return score;
 	}
-	VkPhysicalDeviceHandler::QueueFamilyIndices VkPhysicalDeviceHandler::findQueueFamilies(VkPhysicalDevice device)
+	VkPhysicalDeviceHandler::QueueFamilyIndices VkPhysicalDeviceHandler::findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface)
 	{
 		uint32_t queueFamilyCount = 0;
 		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
@@ -56,8 +57,16 @@ namespace Gaia
 		QueueFamilyIndices indices;
 		for (const auto& queueFamily : queueFamilies)
 		{
+			// Store Graphics queue
 			if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
 				indices.graphicsFamily = i;
+
+			// Store Present queue
+			VkBool32 presentSupport = false;
+			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+			if (presentSupport)
+				indices.presentFamily = i;
+
 			if (indices.IsComplete())
 				break;
 			i++;
