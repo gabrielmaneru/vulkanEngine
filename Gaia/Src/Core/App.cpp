@@ -11,7 +11,7 @@ namespace Gaia
 		try
 		{
 			this->windowHandler = new WinHandler();
-			this->vkHandler = new VkHandler();
+			this->vkHandler = new VkHandler(this->windowHandler->GetWindow());
 		}
 		catch (const std::exception& e)
 		{

@@ -11,7 +11,10 @@ namespace Gaia
 		struct QueueFamilyIndices
 		{
 			std::optional<uint32_t> graphicsFamily;
-			bool IsComplete() { return graphicsFamily.has_value(); }
+			std::optional<uint32_t> presentFamily;
+			bool IsComplete(){ return
+				graphicsFamily.has_value()
+				&& presentFamily.has_value(); }
 		};
 		VkPhysicalDevice getPhysicalDevice()const { return this->physicalDevice; }
 		QueueFamilyIndices getQueueIndices()const { return findQueueFamilies(this->physicalDevice); }

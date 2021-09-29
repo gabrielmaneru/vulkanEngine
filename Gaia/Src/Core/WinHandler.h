@@ -9,8 +9,10 @@ namespace Gaia
 		WinHandler();
 		~WinHandler();
 
-		void PollEvents();
-		bool ShouldClose();
+		void PollEvents()const;
+		bool ShouldClose()const;
+		GLFWwindow* GetWindow()const { return this->window; }
+
 
 		const unsigned int Width = 1920;
 		const unsigned int Height = 1080;

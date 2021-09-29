@@ -5,6 +5,7 @@
 #include <Graphics/VkInstanceHandler.h>
 #include <Graphics/VkPhysicalDeviceHandler.h>
 #include <Graphics/VkLogicalDeviceHandler.h>
+#include <Graphics/VkSurfaceHandler.h>
 
 namespace Gaia
 {
@@ -14,7 +15,7 @@ namespace Gaia
 		"VK_LAYER_KHRONOS_validation"
 	};
 
-	VkHandler::VkHandler()
+	VkHandler::VkHandler(GLFWwindow* window)
 	{
 		if (EnableValidationLayers && !checkValidationLayerSupport())
 			throw std::runtime_error("Validation layers requested, but not available!");
@@ -31,6 +32,7 @@ namespace Gaia
 				throw std::runtime_error("Failed to set up debug messenger!");
 		}
 
+		this->surfaceHandler = new VkSurfaceHandler(window, this->instanceHandler->getInstance());
 		this->physicalDeviceHandler = new VkPhysicalDeviceHandler(this->instanceHandler->getInstance());
 		this->logicalDeviceHandler = new VkLogicalDeviceHandler(this->physicalDeviceHandler);
 	}
@@ -38,6 +40,7 @@ namespace Gaia
 	{
 		delete this->logicalDeviceHandler;
 		delete this->physicalDeviceHandler;
+		delete this->surfaceHandler;
 
 		if (EnableValidationLayers)
 			DestroyDebugUtilsMessengerEXT(this->instanceHandler->getInstance(), debugMessenger, nullptr);

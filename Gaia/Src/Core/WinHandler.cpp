@@ -22,13 +22,12 @@ namespace Gaia
 		glfwTerminate();
 	}
 
-
-	void WinHandler::PollEvents()
+	void WinHandler::PollEvents()const
 	{
 		glfwPollEvents();
 	}
 
-	bool WinHandler::ShouldClose()
+	bool WinHandler::ShouldClose()const
 	{
 		return glfwWindowShouldClose(this->window);
 	}

@@ -5,11 +5,13 @@ namespace Gaia
 	class VkInstanceHandler;
 	class VkPhysicalDeviceHandler;
 	class VkLogicalDeviceHandler;
+	class VkSurfaceHandler;
+	class GLFWwindow;
 
 	class VkHandler
 	{
 	public:
-		VkHandler();
+		VkHandler(GLFWwindow* window);
 		~VkHandler();
 
 #ifdef GAIA_DEBUG
@@ -24,6 +26,7 @@ namespace Gaia
 		VkInstanceHandler* instanceHandler;
 		VkPhysicalDeviceHandler* physicalDeviceHandler;
 		VkLogicalDeviceHandler* logicalDeviceHandler;
+		VkSurfaceHandler* surfaceHandler;
 
 		static bool checkValidationLayerSupport();
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
