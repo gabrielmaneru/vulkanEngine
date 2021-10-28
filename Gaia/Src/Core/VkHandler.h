@@ -1,18 +1,18 @@
 #pragma once
 
-struct GLFWwindow;
-
 namespace Gaia
 {
+	class WinHandler;
 	class VkInstanceHandler;
 	class VkPhysicalDeviceHandler;
 	class VkLogicalDeviceHandler;
 	class VkSurfaceHandler;
+	class VkSwapChainHandler;
 
 	class VkHandler
 	{
 	public:
-		VkHandler(GLFWwindow* window);
+		VkHandler(WinHandler* windowHandler);
 		~VkHandler();
 
 #ifdef GAIA_DEBUG
@@ -21,6 +21,7 @@ namespace Gaia
 		static const bool EnableValidationLayers = false;
 #endif // DEBUG
 		static const std::vector<const char*> ValidationLayers;
+		static const std::vector<const char*> DeviceExtensions;
 		static void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 
 	private:
@@ -28,6 +29,7 @@ namespace Gaia
 		VkPhysicalDeviceHandler* physicalDeviceHandler;
 		VkLogicalDeviceHandler* logicalDeviceHandler;
 		VkSurfaceHandler* surfaceHandler;
+		VkSwapChainHandler* swapChainHandler;
 
 		static bool checkValidationLayerSupport();
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(

@@ -8,6 +8,7 @@ namespace Gaia
 	public:
 		VkLogicalDeviceHandler(VkPhysicalDeviceHandler* physicalDeviceHandler);
 		~VkLogicalDeviceHandler();
+		VkDevice getDevice()const { return this->logicalDevice; }
 
 	private:
 		VkDevice logicalDevice = VK_NULL_HANDLE;

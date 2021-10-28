@@ -8,6 +8,7 @@
 #include <map>
 #include <set>
 #include <optional>
+#include <cstdint>
 
 // External
 #pragma warning(push, 0)

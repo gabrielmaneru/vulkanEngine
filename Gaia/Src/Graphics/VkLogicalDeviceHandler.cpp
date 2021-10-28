@@ -36,7 +36,8 @@ namespace Gaia
 		createInfo.pQueueCreateInfos = queueCreateInfos.data();
 		createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
 		createInfo.pEnabledFeatures = &deviceFeatures;
-		createInfo.enabledExtensionCount = 0;
+		createInfo.enabledExtensionCount = static_cast<uint32_t>(VkHandler::DeviceExtensions.size());
+		createInfo.ppEnabledExtensionNames = VkHandler::DeviceExtensions.data();
 
 		// Enable validation layers
 		if (VkHandler::EnableValidationLayers)

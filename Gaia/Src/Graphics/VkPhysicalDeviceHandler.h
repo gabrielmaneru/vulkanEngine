@@ -15,13 +15,25 @@ namespace Gaia
 				return graphicsFamily.has_value()
 				&& presentFamily.has_value(); }
 		};
+		struct SwapChainSupportDetails
+		{
+			VkSurfaceCapabilitiesKHR capabilities;
+			std::vector<VkSurfaceFormatKHR> formats;
+			std::vector<VkPresentModeKHR> presentModes;
+		};
+
 		QueueFamilyIndices findQueueFamilies()const { return findQueueFamilies(this->physicalDevice, this->surface); }
-		static QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface);
+		SwapChainSupportDetails querySwapChainSupport() const { return querySwapChainSupport(this->physicalDevice, this->surface); }
 		VkPhysicalDevice getPhysicalDevice()const { return this->physicalDevice; }
+		VkSurfaceKHR getSurface()const { return this->surface; }
 		QueueFamilyIndices getQueueIndices()const { return findQueueFamilies(this->physicalDevice, this->surface); }
 
+
 	private:
-		int rateDeviceSuitability(VkPhysicalDevice device)const;
+		static int rateDeviceSuitability(VkPhysicalDevice device, VkSurfaceKHR surface);
+		static QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface);
+		static bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+		static SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface);
 
 		VkSurfaceKHR surface = VK_NULL_HANDLE;
 		VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
