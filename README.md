@@ -1,2 +1,1 @@
-# Gaia
-# The goal of this project is to develop a versatile 3D game engine.
+# The goal of this project is to learn the basics of Vulkan
